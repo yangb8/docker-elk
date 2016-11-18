@@ -15,8 +15,10 @@ services:
     command: -f /etc/logstash/conf.d/
     volumes:
       - ./logstash/config:/etc/logstash/conf.d
+      - ./logstash/logs/:/var/log/logstash/
     ports:
       - "5000:5000"
+      - "5044:5044"
     networks:
       - docker_elk
   kibana:
@@ -27,7 +29,13 @@ services:
       - "5601:5601"
     networks:
       - docker_elk
-
+  filebeat:
+    image: olinicola/filebeat:1.2.3
+    volumes:
+      - ./filebeat/config/filebeat.yml:/etc/filebeat/filebeat.yml
+      - ./filebeat/logs:/var/log/
+    networks:
+      - docker_elk
 networks:
   docker_elk:
     driver: bridge

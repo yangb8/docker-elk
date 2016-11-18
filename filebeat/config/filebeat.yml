@@ -1,0 +1,19 @@
+filebeat:
+  prospectors:
+    -
+      paths:
+        - "/var/log/samples.log"
+      document_type: sample
+    -
+      paths:
+        - "/var/log/dataheadsvc.log"
+      document_type: access
+    -
+      paths:
+        - "/var/log/error.log"
+      document_type: error
+output:
+  logstash:
+    enabled: true
+    hosts: ["logstash:5044"]
+    index: logstash
