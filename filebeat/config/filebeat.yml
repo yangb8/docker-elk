@@ -15,5 +15,5 @@ filebeat:
 output:
   logstash:
     enabled: true
-    hosts: ["logstash:5044"]
+    hosts: ["logstash:5044", "logstash2:5044"]
     index: logstash
